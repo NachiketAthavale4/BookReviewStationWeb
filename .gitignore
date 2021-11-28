@@ -3,3 +3,16 @@
 ################################################################################
 
 /.vs/BookReviewStation.Web
+/BookReviewStation.Abstract/bin/Debug
+/BookReviewStation.Abstract/obj/Debug
+/BookReviewStation.DataLayer/bin/Debug
+/BookReviewStation.DataLayer/obj/Debug
+/BookReviewStation.DataLayer
+/BookReviewStation.Models/bin/Debug
+/BookReviewStation.Models/obj/Debug
+/BookReviewStation.Service/bin/Debug
+/BookReviewStation.Service/obj/Debug
+/BookReviewStation.Web/obj/Debug
+/BookReviewStation.Web.Tests/bin/Debug
+/BookReviewStation.Web.Tests/obj/Debug
+/packages

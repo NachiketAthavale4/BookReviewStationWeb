@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BookReviewStation.Models.Review>
+@using BookReviewStation.Web.Helpers
+
+@foreach (var reviewItem in Model)
+{
+    <div class="row">
+        <div class="col-xl-4">
+            <h5>
+                @reviewItem.ReviewerName
+                @if (!string.IsNullOrWhiteSpace(reviewItem.ReviewingOrganization))
+                {
+                    <sub class="mx-1">, from @reviewItem.ReviewingOrganization</sub>
+                }
+            </h5>
+        </div>
+        <div class="col-xl-2">
+            @Html.GetStarRatingHtmlWithNoText(reviewItem.Rating)
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <h6>@reviewItem.ReviewTitle</h6>
+    </div>
+
+    <div class="row my-2">
+        <p style="text-align: justify; overflow-y: auto; height: auto;">@reviewItem.ReviewDescription</p>
+    </div>
+
+    <div class="row my-1">
+        <a href="@reviewItem.ReviewLink">Click here to read the complete review</a>
+    </div>
+
+    <br />
+}

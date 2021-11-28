@@ -1,0 +1,121 @@
+﻿@model BookReviewStation.Web.Models.BookDetailsViewModel
+@using BookReviewStation.Web.Helpers
+
+@{
+    ViewBag.Title = "GetBook";
+}
+
+<div>
+    <h2>@Model.Name<sub class="mx-3">by @Model.AuthorName</sub></h2>
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3" style="background-color: black;">
+            Image
+        </div>
+
+        <div class="mx-5 col-xl-8">
+            <div class="row">
+                <div class="mx-2 my-1 col">
+                    <div class="row">
+                        <h5>Critics Reviews</h5>
+                    </div>
+                    @Html.GetStarRatingHtml(@Model.AverageCriticsRating)
+                    <span>(based on @Model.NumberOfCriticsReviews critics)</span>
+                </div>
+                <div class="mx-4 my-1 col">
+                    <div class="row">
+                        <h5>User Reviews</h5>
+                    </div>
+                    @Html.GetStarRatingHtml(@Model.AverageUserRating)
+                    <span>(based on @Model.NumberOfUserReviews users)</span>
+                </div>
+            </div>
+
+            <div class="border border-dark">
+                <div class="mx-2 my-2">
+                    <h4>Description:</h4>
+                    <p style="text-align: justify; overflow-y: auto; height: auto;">
+                        @Model.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 my-4">
+            <h3>Book Details</h3>
+        </div>
+        <div class="col-xl-4">
+            @Html.SafeValueDisplay("Publisher Name", @Model.Publisher)
+            @Html.SafeValueDisplay("ISBN-10", @Model.ISBN10)
+            @Html.SafeValueDisplay("ISBN-13", @Model.ISBN13)
+            @Html.SafeValueDisplay("Country of Origin", @Model.CountryOfOrigin)
+            @Html.SafeValueDisplay("Genre", @Model.Genre)
+        </div>
+        <div class="col-xl-4">
+            @Html.SafeValueIntegerDisplay("Number of Pages", @Model.NumberOfPages)
+            @Html.SafeValueIntegerDisplay("Weight", @Model.BookWeight)
+            @Html.SafeValueDimensionsDisplay("Dimensions", @Model.Height, @Model.Width, @Model.Length)
+            @Html.SafeValueDisplay("Language", @Model.Language)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 my-4">
+            <h3>About the author</h3>
+        </div>
+
+        <div class="col-xl-3" style="background-color: black; border-radius: 50%; width: 12%"></div>
+
+        <div class="col-xl-9 mx-5">
+            <div class="row">
+                <h4>@Model.AuthorName</h4>
+            </div>
+
+            <div class="row">
+                <p style="text-align: justify; overflow-y: auto; height: auto;">
+                    @Model.AuthorDescription
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 my-5">
+            <h3>Critics Reviews</h3>
+        </div>
+        @Html.Action(
+            "GetCriticsReviewsForBook", 
+            "Review", 
+            routeValues: new { bookId = @Model.BookId, pageSize = 3, pageNumber = 1 })
+        <br />
+        @Html.ActionLink(
+            linkText: "Check out more Critics Reviews",
+            actionName: "Critics",
+            controllerName: "Review",
+            routeValues: new { bookId = Model.BookId },
+            htmlAttributes: new { style = "text-align: center;" })
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 my-4">
+            <h3>User Reviews</h3>
+        </div>
+        @Html.Action(
+            "GetUserReviewsForBook",
+            "Review",
+            routeValues: new { bookId = @Model.BookId, pageSize = 3, pageNumber = 1 })
+        <br />
+        @Html.ActionLink(
+            linkText: "Check out more User Reviews",
+            actionName: "User",
+            controllerName: "Review",
+            routeValues: new { bookId = Model.BookId },
+            htmlAttributes: new { style = "text-align: center;" })
+    </div>
+</div>
