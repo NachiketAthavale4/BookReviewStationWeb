@@ -13,20 +13,20 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xl-3" style="background-color: black;">
+        <div class="col-sm-12 col-md-12 col-xl-3" style="background-color: black;">
             Image
         </div>
 
-        <div class="mx-5 col-xl-8">
+        <div class="mx-xl-5 col-xl-8">
             <div class="row">
-                <div class="mx-2 my-1 col">
+                <div class="mx-xl-2 my-1 col">
                     <div class="row">
                         <h5>Critics Reviews</h5>
                     </div>
                     @Html.GetStarRatingHtml(@Model.AverageCriticsRating)
                     <span>(based on @Model.NumberOfCriticsReviews critics)</span>
                 </div>
-                <div class="mx-4 my-1 col">
+                <div class="mx-xl-4 my-x-1 col">
                     <div class="row">
                         <h5>User Reviews</h5>
                     </div>
@@ -70,9 +70,9 @@
             <h3>About the author</h3>
         </div>
 
-        <div class="col-xl-3" style="background-color: black; border-radius: 50%; width: 12%"></div>
+        <div class="col-sm-12 col-md-12 col-xl-3" style="background-color: black; border-radius: 50%; width: 12%"></div>
 
-        <div class="col-xl-9 mx-5">
+        <div class="col-sm-12 col-xl-9 mx-xl-5">
             <div class="row">
                 <h4>@Model.AuthorName</h4>
             </div>
@@ -90,8 +90,7 @@
             <h3>Critics Reviews</h3>
         </div>
         @Html.Action(
-            "GetCriticsReviewsForBook", 
-            "Review", 
+            "GetCriticsReviewsForBook",
             routeValues: new { bookId = @Model.BookId, pageSize = 3, pageNumber = 1 })
         <br />
         @Html.ActionLink(
@@ -108,7 +107,6 @@
         </div>
         @Html.Action(
             "GetUserReviewsForBook",
-            "Review",
             routeValues: new { bookId = @Model.BookId, pageSize = 3, pageNumber = 1 })
         <br />
         @Html.ActionLink(

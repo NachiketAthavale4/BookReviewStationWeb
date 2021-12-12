@@ -5,6 +5,8 @@
     using System.Web.Mvc;
     using System.Net;
     using BookReviewStation.Web.Extensions;
+    using BookReviewStation.Models;
+    using System.Linq;
 
     public class BookController : Controller
     {
@@ -19,6 +21,12 @@
             this.bookService = bookService;
             this.reviewService = reviewService;
             this.authorService = authorService;
+        }
+
+        [HttpGet]
+        public ActionResult GetBooks()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -50,6 +58,40 @@
             var authorInfo = this.authorService.GetAuthorInfo(bookId);
 
             return View(bookDetail.MapToViewModel(criticsReviewScore, userReviewScore, authorInfo));
+        }
+
+        [HttpGet]
+        public ActionResult AddBook()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddBook(BookDetails bookDetails)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult GetCriticsReviewsForBook(long bookId, int pageSize = 5, int pageNumber = 1)
+        {
+            var criticsReviewsList = this.reviewService.GetCriticsReviewsForBook(bookId, pageSize, pageNumber);
+
+            criticsReviewsList = criticsReviewsList.ToList().Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
+            return PartialView(criticsReviewsList);
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult GetUserReviewsForBook(long bookId, int pageSize = 5, int pageNumber = 1)
+        {
+            var userReviewsList = this.reviewService.GetUserReviewsForBook(bookId, pageSize, pageNumber);
+
+            userReviewsList = userReviewsList.ToList().Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
+            return PartialView(userReviewsList);
         }
     }
 }
