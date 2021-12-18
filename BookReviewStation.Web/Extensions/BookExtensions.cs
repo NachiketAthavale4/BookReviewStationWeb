@@ -2,6 +2,7 @@
 {
     using BookReviewStation.Models;
     using BookReviewStation.Web.Models;
+    using System.Web;
 
     public static class BookExtensions
     {
@@ -30,6 +31,7 @@
                 ISBN13 = bookDetails.ISBNDetails?.ISBN13,
                 ErrorCode = bookDetails.ErrorCode,
                 ErrorDescription = bookDetails.ErrorDescription,
+                BookCover = bookDetails.BookCover,
                 ImageData = bookDetails.ImageData,
                 ImageMimeType = bookDetails.ImageMimeType,
                 AverageCriticsRating = criticReviewScore == null ? 0 : criticReviewScore.AverageRating,
@@ -38,6 +40,28 @@
                 NumberOfUserReviews = userReviewScore == null ? 0 : userReviewScore.NumberOfReviews,
                 AuthorDescription = authorInfo == null ? string.Empty : authorInfo.Description
             };
+        }
+
+        public static byte[] ReadImage(this HttpPostedFileBase postedFile)
+        {
+            if (postedFile != null)
+            {
+                var imageData = new byte[postedFile.ContentLength];
+                postedFile.InputStream.Read(imageData, 0, postedFile.ContentLength);
+                return imageData;
+            }
+
+            return null;
+        }
+
+        public static string ReadImageType(this HttpPostedFileBase postedFile)
+        {
+            if (postedFile != null)
+            {
+                return postedFile.ContentType;
+            }
+
+            return null;
         }
     }
 }

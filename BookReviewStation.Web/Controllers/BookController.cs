@@ -63,12 +63,24 @@
         [HttpGet]
         public ActionResult AddBook()
         {
-            return View();
+            var bookDetails = new BookDetails
+            {
+                PhysicalBookDetails = new PhysicalBookDetails(),
+                ISBNDetails = new ISBNDetails()
+            };
+            return View(bookDetails);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddBook(BookDetails bookDetails)
         {
+            if (bookDetails != null)
+            {
+                bookDetails.ImageData = bookDetails.BookCover.ReadImage();
+                bookDetails.ImageMimeType = bookDetails.BookCover.ReadImageType();
+            }
+
             return View();
         }
 

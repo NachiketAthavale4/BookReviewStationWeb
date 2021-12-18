@@ -1,4 +1,6 @@
-﻿namespace BookReviewStation.Web.Models
+﻿using System.Web;
+
+namespace BookReviewStation.Web.Models
 {
     public class BookDetailsViewModel
     {
@@ -6,6 +8,7 @@
         public string Name { get; set; }
         public string AuthorName { get; set; }
         public string Publisher { get; set; }
+        public HttpPostedFileBase BookCover { get; set; }
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }
         public string Description { get; set; }

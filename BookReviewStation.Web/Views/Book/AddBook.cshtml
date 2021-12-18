@@ -1,0 +1,196 @@
+﻿@model BookReviewStation.Models.BookDetails
+
+@{
+    ViewBag.Title = "Add Book";
+}
+
+<h2>Add New Book</h2>
+
+@using (Html.BeginForm("AddBook", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-xl-6">
+                <h3>Basic Book Details</h3>
+                <div class="my-2">
+                    @Html.LabelFor(
+                        x => x.Name,
+                        htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                    @Html.TextBoxFor(
+                            x => x.Name,
+                            htmlAttributes: new
+                            {
+                                @class = "form-control-sm col-xl-9 border border-dark",
+                                placeholder = "Enter Book Name",
+                                tabIndex = 1
+                            })
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <h3>Book Dimension Details</h3>
+                <div class="my-2" id="bookWeight">
+                    @Html.LabelFor(x => x.PhysicalBookDetails.BookWeight,
+                                    htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                    @Html.TextBoxFor(x => x.PhysicalBookDetails.BookWeight,
+                            htmlAttributes: new
+                            {
+                                @class = "form-control-sm border border-dark col-xl-9",
+                                placeholder = "Enter Book Weight"
+                            })
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-xl-6" id="bookGenre">
+                @Html.LabelFor(x => x.Genre,
+                    htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                @Html.TextBoxFor(x => x.Genre,
+                        htmlAttributes: new
+                        {
+                            @class = "form-control-sm border border-dark col-xl-9",
+                            placeholder = "Enter Book Genre",
+                            tabIndex = 2
+                        })
+            </div>
+            <div class="col-xl-6" id="bookPages">
+                @Html.LabelFor(x => x.PhysicalBookDetails.NumberOfPages,
+                                htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                @Html.TextBoxFor(x => x.PhysicalBookDetails.NumberOfPages,
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control-sm border border-dark col-xl-9",
+                                    type = "number",
+                                    placeholder = "Number of Pages"
+                                })
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col-xl-6" id="bookCountry">
+                @Html.LabelFor(x => x.CountryOfOrigin,
+                    htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                @Html.TextBoxFor(x => x.CountryOfOrigin,
+                        htmlAttributes: new
+                        {
+                            @class = "form-control-sm border border-dark col-xl-9",
+                            placeholder = "Enter Book Country of Origin",
+                            tabIndex = 3
+                        })
+            </div>
+            <div class="col-xl-6" id="bookHeight">
+
+                @Html.LabelFor(x => x.PhysicalBookDetails.Height,
+                                htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                @Html.TextBoxFor(x => x.PhysicalBookDetails.Height,
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control-sm border border-dark col-xl-9",
+                                    type = "number"
+                                })
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-xl-6" id="bookLanguage">
+                @Html.LabelFor(x => x.Language,
+                    htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                @Html.DropDownListFor(x => x.Language,
+                                      new SelectList(new[] { "English", "French", "Spanish", "Russian" }),
+                                      "Choose Book Language",
+                                      htmlAttributes: new
+                                      {
+                                        @class = "form-control-sm border border-dark col-xl-9",
+                                        placeholder = "Enter Book Language",
+                                        tabIndex = 4
+                                      })
+            </div>
+            <div class="col-xl-6" id="bookWidth">
+                @Html.LabelFor(x => x.PhysicalBookDetails.Width,
+                                htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                @Html.TextBoxFor(x => x.PhysicalBookDetails.Width,
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control-sm border border-dark col-xl-9",
+                                    type = "number"
+                                })
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col-xl-6" id="bookPublisher">
+                @Html.LabelFor(x => x.Publisher,
+                    htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                @Html.TextBoxFor(x => x.Publisher,
+                        htmlAttributes: new
+                        {
+                            @class = "form-control-sm border border-dark col-xl-9",
+                            placeholder = "Enter Book Publisher",
+                            tabIndex = 5
+                        })
+            </div>
+            <div class="col-xl-6" id="bookLength">
+                @Html.LabelFor(x => x.PhysicalBookDetails.Length,
+                                htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                @Html.TextBoxFor(x => x.PhysicalBookDetails.Length,
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control-sm border border-dark col-xl-9",
+                                    type = "number"
+                                })
+            </div>
+        </div>
+
+        <div class="row my-1">
+            <div class="col-xl-5" id="bookDesc">
+                @Html.LabelFor(x => x.Description,
+                        htmlAttributes: new { @class = "col-form-label-lg" })
+                @Html.TextAreaFor(x => x.Description,
+                                    htmlAttributes: new
+                                    {
+                                        @class = "form-control border border-dark",
+                                        rows = 4,
+                                        style = "resize: none;",
+                                        placeholder = "Enter Book Description",
+                                        tabIndex = 6
+                                    })
+            </div>
+            <div class="col-xl-1"></div>
+            <div class="col-xl-6 my-1">
+                <h3>ISBN Details</h3>
+                <div id="isbn10" class="my-3">
+                    @Html.LabelFor(x => x.ISBNDetails.ISBN10,
+                                    htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                    @Html.TextBoxFor(x => x.ISBNDetails.ISBN10,
+                            htmlAttributes: new
+                            {
+                                @class = "form-control-sm border border-dark col-xl-9",
+                                placeholder = "Enter ISBN 10"
+                            })
+                </div>
+                <div id="isbn13" class="my-3">
+                    @Html.LabelFor(x => x.ISBNDetails.ISBN13,
+                                    htmlAttributes: new { @class = "col-form-label-lg col-xl-2" })
+                    @Html.TextBoxFor(x => x.ISBNDetails.ISBN13,
+                            htmlAttributes: new
+                            {
+                                @class = "form-control-sm border border-dark col-xl-9",
+                                placeholder = "Enter ISBN 13"
+                            })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-6" id="bookCover">
+                @Html.LabelFor(x => x.BookCover,
+                        htmlAttributes: new { @class = "col-form-label-lg" })
+                @Html.TextBoxFor(x => x.BookCover, htmlAttributes: new { type = "file", @class = "mx-3" })
+            </div>
+        </div>
+
+        @Html.AntiForgeryToken()
+        <button class="btn btn-primary btn-group-lg my-3" type="submit">Submit</button>
+    </div>
+
+}

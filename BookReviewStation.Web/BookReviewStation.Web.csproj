@@ -196,6 +196,7 @@
     <Content Include="Views\Book\GetCriticsReviewsForBook.cshtml" />
     <Content Include="Views\Book\GetUserReviewsForBook.cshtml" />
     <Content Include="Views\Book\GetBooks.cshtml" />
+    <Content Include="Views\Book\AddBook.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
